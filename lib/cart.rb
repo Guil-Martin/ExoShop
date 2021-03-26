@@ -22,7 +22,6 @@ class Cart
 
     def <<(name)
         @items[name] = @items[name] ? @items[name] + 1 : 1
-        p "#{name} - added"
         p @items
     end
     

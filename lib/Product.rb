@@ -56,26 +56,16 @@ class Product
         case @language
         when "french"
             if cart.items["cerise"]
-                return cart.total -= 20 if cart.items["cerise"] % 2 == 0
+                cart.total -= 20 if cart.items["cerise"] % 2 == 0
             end
             if cart.items["banane"]
-                return cart.total -= @product["banane"] if cart.items["banane"] % 2 == 0
+                cart.total -= @product["banane"] if cart.items["banane"] % 2 == 0
             end            
         when "english"
-            return cart.total -= @product["apple"] if cart.items["apple"] % 3 == 0
+            cart.total -= @product["apple"] if cart.items["apple"] % 3 == 0
         when "italian"
-            return cart.total -= 50 if cart.items["mele"] % 2 == 0
+            cart.total -= 50 if cart.items["mele"] % 2 == 0
         end
-    end
-
-    def price_euro(price)
-        euro, centime = @price.divmod(100) 
-        "#{euro},#{centime}€"
-    end
-
-    def price_dollar(price)
-        euro, centime = @price.divmod(100) 
-        "#{euro},#{centime}$"
     end
 
 end
