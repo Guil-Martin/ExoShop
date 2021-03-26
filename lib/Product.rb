@@ -55,12 +55,8 @@ class Product
     def discount(cart)
         case @language
         when "french"
-            if cart.items["cerise"]
-                cart.total -= 20 if cart.items["cerise"] % 2 == 0
-            end
-            if cart.items["banane"]
-                cart.total -= @product["banane"] if cart.items["banane"] % 2 == 0
-            end            
+            cart.total -= 20 if cart.items["cerise"] && cart.items["cerise"] % 2 == 0
+            cart.total -= @product["banane"] if cart.items["banane"] && cart.items["banane"] % 2 == 0  
         when "english"
             cart.total -= @product["apple"] if cart.items["apple"] % 3 == 0
         when "italian"
