@@ -1,24 +1,89 @@
 class Product
     
-    def initialize(name, price)
-        @name = name
-        @price = price
+    attr_reader :name, :product
+
+    def initialize()
+
+        @productsFrench = {
+            "pomme" => 100,
+            "banane" => 150, 
+            "cerise" => 75,
+            "ananas" => 230
+        }
+        @productsItalian = {
+            "mele" => 100,
+            "banana" => 150, 
+            "ciliegia " => 75,
+            "ananas " => 230
+        }
+        @productsEnglish = {
+            "apple" => 100,
+            "banana" => 150, 
+            "cherry" => 75,
+            "pineapples" => 230
+        }
+
+        @language = "french"
+        @product = @productsFrench
+
     end
 
-    def name
-        @name
+    def entry(name, cart)
+           
+        p "entry total : #{cart.total}"
+        #p @productsFrench
+
+        if @productsFrench[name]
+            @product = @productsFrench
+            @language = "french"
+            #price_euro(@products[name])
+            add_total(name, cart)
+        elsif @productsEnglish[name]
+            @product = @productsEnglish
+            @language = "english"
+            #price_dollar(@products[name])
+            add_total(name, cart)
+        elsif @productsItalian[name]
+            @product = @productsItalian
+            @language = "italian"
+            #price_euro(@products[name])
+            add_total(name, cart)
+        else
+            p "No such product in available products"
+        end
     end
 
-    def price
-        @price
+    def add_total(name, cart)
+        p "add_total total : #{cart.total}"
+        cart << name
+        cart.total += @product[name]
+        discount(cart)
     end
 
-    def priceEuro
+    def discount(cart)
+        p "discount total : #{cart.total}"
+        p "discount @language : #{@language}"
+        case @language
+        when "french"
+            if cart.items["cerise"]
+                return cart.total -= 20 if cart.items["cerise"] % 2 == 0
+            end
+            if cart.items["banane"]
+                return cart.total -= @product["banane"] if cart.items["banane"] % 2 == 0
+            end            
+        when "english"
+            return cart.total -= @product["apple"] if cart.items["apple"] % 3 == 0
+        when "italian"
+            return cart.total -= 50 if cart.items["mele"] % 2 == 0
+        end
+    end
+
+    def price_euro(price)
         euro, centime = @price.divmod(100) 
         "#{euro},#{centime}€"
     end
 
-    def priceDollar
+    def price_dollar(price)
         euro, centime = @price.divmod(100) 
         "#{euro},#{centime}$"
     end
