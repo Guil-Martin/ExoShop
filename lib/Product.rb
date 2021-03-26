@@ -29,24 +29,17 @@ class Product
     end
 
     def entry(name, cart)
-           
-        p "entry total : #{cart.total}"
-        #p @productsFrench
-
         if @productsFrench[name]
             @product = @productsFrench
             @language = "french"
-            #price_euro(@products[name])
             add_total(name, cart)
         elsif @productsEnglish[name]
             @product = @productsEnglish
             @language = "english"
-            #price_dollar(@products[name])
             add_total(name, cart)
         elsif @productsItalian[name]
             @product = @productsItalian
             @language = "italian"
-            #price_euro(@products[name])
             add_total(name, cart)
         else
             p "No such product in available products"
@@ -54,15 +47,12 @@ class Product
     end
 
     def add_total(name, cart)
-        p "add_total total : #{cart.total}"
         cart << name
         cart.total += @product[name]
         discount(cart)
     end
 
     def discount(cart)
-        p "discount total : #{cart.total}"
-        p "discount @language : #{@language}"
         case @language
         when "french"
             if cart.items["cerise"]
