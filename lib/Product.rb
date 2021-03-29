@@ -1,62 +1,66 @@
+# List of items available, validation of products and discounts
+# than adding items to cart
 class Product
-    
-    attr_reader :name, :product
+  attr_reader :name, :product
 
-    def initialize()
+  def initialize()
+    @products_french = {
+      "pomme" => 100,
+      "banane" => 150,
+      "cerise" => 75,
+      "ananas" => 230
+    }
+    @products_italian = {
+      "mele" => 100,
+      "banana" => 150,
+      "ciliegia " => 75,
+      "ananas " => 230
+    }
+    @products_english = {
+      "apple" => 100,
+      "banana" => 150,
+      "cherry" => 75,
+      "pineapples" => 230
+    }
 
-        @productsFrench = {
-            "pomme" => 100,
-            "banane" => 150, 
-            "cerise" => 75,
-            "ananas" => 230
-        }
-        @productsItalian = {
-            "mele" => 100,
-            "banana" => 150, 
-            "ciliegia " => 75,
-            "ananas " => 230
-        }
-        @productsEnglish = {
-            "apple" => 100,
-            "banana" => 150, 
-            "cherry" => 75,
-            "pineapples" => 230
-        }
+    @language = "french"
+    @product = @products_french
+  end
 
-        @language = "french"
-        @product = @productsFrench
-
+  def entry(name, cart)
+    if @products_french[name]
+      @product = @products_french
+      @language = "french"
+      add_total(name, cart)
+    elsif @products_english[name]
+      @product = @products_english
+      @language = "english"
+      add_total(name, cart)
+    elsif @products_italian[name]
+      @product = @products_italian
+      @language = "italian"
+      add_total(name, cart)
+    else
+      p "No such product in available products"
     end
+  end
 
-    def entry(name, cart)
-        if @productsFrench[name]
-            @product = @productsFrench
-            @language = "french"
-            add_total(name, cart)
-        elsif @productsEnglish[name]
-            @product = @productsEnglish
-            @language = "english"
-            add_total(name, cart)
-        elsif @productsItalian[name]
-            @product = @productsItalian
-            @language = "italian"
-            add_total(name, cart)
-        else
-            p "No such product in available products"
-        end
+  def add_total(name, cart)
+    cart << name
+    cart.total += @product[name]
+    p cart.total
+    discount(cart)
+  end
+
+  def discount(cart)
+    case @language
+    when "french"
+      cart.total -= 20 if cart.items["cerise"]&.even?
+      cart.total -= @product["banane"] if cart.items["banane"]&.even?
+    when "english"
+      cart.total -= @product["apple"] if (cart.items["apple"]&.%3).zero?
+    when "italian"
+      cart.total -= 50 if cart.items["mele"]&.even?
     end
-
-    def add_total(name, cart)
-        cart << name
-        cart.total += @product[name]
-        discount(cart)
-    end
-
-    def discount(cart)
-        cart.total -= 20 if cart.items["cerise"] && cart.items["cerise"] % 2 == 0
-        cart.total -= @product["banane"] if cart.items["banane"] && cart.items["banane"] % 2 == 0  
-        cart.total -= @product["apple"] if cart.items["apple"] && cart.items["apple"] % 3 == 0
-        cart.total -= 50 if cart.items["mele"] && cart.items["mele"] % 2 == 0
-    end
-
+  end
 end

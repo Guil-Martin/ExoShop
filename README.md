@@ -1,0 +1,1 @@
+<a href="https://codeclimate.com/github/GuillaumeM-OPC/ExoShop/maintainability"><img src="https://api.codeclimate.com/v1/badges/8a4d017de6c29c53593b/maintainability" /></a>
