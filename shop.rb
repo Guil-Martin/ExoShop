@@ -1,6 +1,8 @@
 require "./lib/product"
 require "./lib/cart"
 
+require "pry"
+
 # class Shop
 
 #   def initialize
@@ -11,15 +13,18 @@ require "./lib/cart"
 #   def get_cart_content
 #     @cart.cart_list
 #   end
-  
+
 #   def get_total
 #     @cart.display_total
 #   end
 
 # end
 
-product = Product.new
-cart = Cart.new
+product = Product.instance
+cart = Cart.instance
+
+p product
+p cart
 
 ARGF.each do |entry|
   entry = entry.chomp.downcase

@@ -1,0 +1,7 @@
+  development:
+    adapter: sqlite3
+    encoding: utf8
+    database: myshopDB.db
+    username: cmoi
+    password: 1234
+    host: localhost:7373

@@ -9,19 +9,20 @@ gem "pry"
 
 gem "rspec"
 
-gem "rubocop"
+#gem "rubocop"
 
 gem "rufo"
 
-
-
+gem "nokogiri"
 # Ruby web server
 gem "thin"
 # Generic interface of different Ruby template engines
+# gem uninstall eventmachine
+# gem install eventmachine --platform ruby
 gem "tilt"
 # Ruby template engine
 gem "erb"
 # Generic interface of ruby web servers
 gem "rack"
-
-gem "nokogiri"
+# Database
+gem "sqlite3"

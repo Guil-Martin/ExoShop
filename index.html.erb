@@ -1,9 +1,15 @@
 <h1>Caisse enregistreuse</h1>
 
-<h3>Total : <%=  %></h3>
- <form>
-  <label for="fname">First name:</label><br>
-  <input type="text" id="fname" name="fname"><br>
-  <label for="lname">Last name:</label><br>
-  <input type="text" id="lname" name="lname">
-</form> 
+<h3>Total : <%= cart_total %></h3>
+<form method="post" action="/add_product">
+  <input type="text" id="fruit" name="fruit"><br>
+  <button type="submit" value="submit">Scanner un article</button>
+</form>
+<form method="post" action="/empty_cart">
+  <button type="submit" value="Submit">Vider le panier</button>
+</form>
+
+<h3>Liste de produits : </h3>
+<% cart_list.each do |product| %>
+  <p><%= product %></p>
+<% end %>
