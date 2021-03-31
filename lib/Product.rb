@@ -8,60 +8,31 @@ class Product
   end
 
   def initialize()
-    @products_french = {
+    @product = {
       "pomme" => 100,
-      "banane" => 150,
-      "cerise" => 75,
-      "ananas" => 230,
-    }
-    @products_italian = {
-      "mele" => 100,
-      "banana" => 150,
-      "ciliegia " => 75,
-      "ananas " => 230,
-    }
-    @products_english = {
       "apple" => 100,
+      "mele" => 100,
+      "banane" => 150,
       "banana" => 150,
+      "cerise" => 75,
       "cherry" => 75,
-      "pineapples" => 230,
+      "ciliegia " => 75,
+      "ananas" => 230,
+      "pineapples" => 230
     }
-
-    @language = "french"
-    @product = @products_french
   end
 
-  def entry(name, cart)
-    if @products_french[name]
-      @product = @products_french
-      @language = "french"
-      add_total(name, cart)
-    elsif @products_english[name]
-      @product = @products_english
-      @language = "english"
-      add_total(name, cart)
-    elsif @products_italian[name]
-      @product = @products_italian
-      @language = "italian"
-      add_total(name, cart)
-    else
-      p "No such product in available products"
-    end
+  def entry(name, price, cart)
+      cart << name
+      cart.total += price
+      discount(cart)
+      p cart.total
   end
 
-  def add_total(name, cart)
-    cart << name
-    cart.total += @product[name]
-    discount(cart)
-    p cart.total
-  end
+  private
 
   def discount(cart)
-    p "discount total begin #{cart.total}"
-
     #cart.total -= discount_cherry_fr(cart) + discount_banana_fr(cart) + discount_apple_en(cart) + discount_apple_it(cart)
-
-    p "discount total end #{cart.total}"
   end
 
   def discount_cherry_fr(cart)

@@ -3,23 +3,6 @@ require "./lib/cart"
 
 require "pry"
 
-# class Shop
-
-#   def initialize
-#     @product = Product.new
-#     @cart = Cart.new
-#   end
-
-#   def get_cart_content
-#     @cart.cart_list
-#   end
-
-#   def get_total
-#     @cart.display_total
-#   end
-
-# end
-
 product = Product.instance
 cart = Cart.instance
 

@@ -3,7 +3,16 @@
 <h3>Total : <%= cart_total %></h3>
 <form method="post" action="/add_product">
   <input type="text" id="fruit" name="fruit"><br>
+
+  <select name="fruit" id="fruit_select">
+    <option value="">--Choisissez un produit--</option>
+    <% product_list.each do |k,v| %>
+      <option value="<%= k %>"><%= k %></option>
+    <% end %>
+  </select>
+
   <button type="submit" value="submit">Scanner un article</button>
+
 </form>
 <form method="post" action="/empty_cart">
   <button type="submit" value="Submit">Vider le panier</button>

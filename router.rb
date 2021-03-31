@@ -14,8 +14,9 @@ class Router
       template = Tilt.new("index.html.erb")
       [200, { "Content-Type" => "text/html" }, template.render(
         self,
+        product_list: @controller.product_list,
         cart_total: @controller.cart_total,
-        cart_list: @controller.cart_list,
+        cart_list: @controller.cart_list
       )]
     when "/add_product"
       @controller.add_cart(params["fruit"])
