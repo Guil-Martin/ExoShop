@@ -81,9 +81,12 @@ class Controller
     begin
       @db = SQLite3::Database.open "myshopDB.db"
       @db.results_as_hash = true
-      req = @db.execute "SELECT * from products"
+
       @data = {}
-      req.each { |ele| @data[ele["name"]] = ele["price"] }
+      @db.execute("SELECT name, price FROM products").map do |row|
+        @data[row["name"]] = row["price"]
+      end
+
       @data
     rescue SQLite3::Exception => e
       puts "Exception occurred"
@@ -93,7 +96,15 @@ class Controller
     end
   end
 
+  def render_json(params, code = 200)
+    [
+      code,
+      {"Content-Type" => "application/json"},
+      [params.to_json]
+    ]
+  end
+
   def redirect(to)
-    [302, {'Location' => to}, []]
+    [302, {"Location" => to}, []]
   end
 end

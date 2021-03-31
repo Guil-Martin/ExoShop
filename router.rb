@@ -13,6 +13,8 @@ class Router
       controller.index
     when "/add"
       controller.add_cart(params["fruit"])
+    when "/add_select"
+      controller.add_cart(params["fruit_select"])
     when "/empty_cart"
       controller.empty_cart
     else
