@@ -25,6 +25,11 @@ class Cart
     "Prix total : #{euro},#{centime}"
   end
 
+  def clear
+    @items.clear
+    @total = 0
+  end
+
   def <<(name)
     @items[name] += 1
     p @items
