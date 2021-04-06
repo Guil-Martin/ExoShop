@@ -2,7 +2,7 @@ require "nokogiri"
 require "open-uri"
 require "sqlite3"
 require "pry"
-require "./lib/yatch"
+require "./lib/yacht"
 
 url = "https://greta-code-pizza.github.io/topsails/"
 html = URI.open(url)
@@ -55,7 +55,7 @@ boat_length = boat_length.map {|l| l.delete_suffix("m").to_f}
 
 # binding.pry
 
-Yatch::add_boats(boat_title:boat_title, 
+Yacht::add_boats(boat_title:boat_title, 
           boat_descriptions:boat_descriptions, 
           boat_prices_value:boat_prices_value,
           boat_prices_taxe:boat_prices_taxe, 
@@ -63,7 +63,7 @@ Yatch::add_boats(boat_title:boat_title,
           boat_width:boat_width, 
           boat_length:boat_length)
 
-Yatch::all.each do |boat|
+Yacht::all.each do |boat|
 
     p boat.name
     p boat.description

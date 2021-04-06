@@ -7,7 +7,7 @@ require "sqlite3"
 require "./lib/product"
 require "./lib/cart"
 
-require "./lib/yatch"
+require "./lib/yacht"
 
 class Controller
   attr_accessor :params
@@ -69,11 +69,11 @@ class Controller
   end
 
   def boats
-    @yatchs = Yatch::all
+    @yachts = Yacht::all
 
     # binding.pry
     
-    render({yatchs: @yatchs})
+    render({yachts: @yachts})
   end
 
   private

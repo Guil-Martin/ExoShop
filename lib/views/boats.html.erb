@@ -4,22 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Yachts</title>
 </head>
 <body>
 
-    <h1>Scraped boats</h1>
+    <h1 style="text-align: center">Scraped boats</h1>
 
-    <h3>Liste des Yatchs : </h3>
-    <% yatchs.each do |yatch| %>
-        <p><%= yatch.name %></p>
-        <p><%= yatch.description %></p>
-        <p><%= yatch.price %></p>
-        <p><%= yatch.taxation %></p>
-        <p><%= yatch.year %></p>
-        <p><%= yatch.width %></p>
-        <p><%= yatch.length %></p>
-    <% end %>
+    <h3 style="text-align: center">Liste des Yachts : </h3>
+        <div class="yachts" style="display: flex; flex-wrap: wrap;justify-content: center">
+        <% yachts.each do |yacht| %>
+            <div class="yacht" style="border: 2px solid black;width: 20%">
+                <p>Nom : <%= yacht.name %></p>
+                <p>Description : <%= yacht.description %></p>
+                <p>Prix : <%= yacht.price %><%= yacht.taxation %></p>
+                <p>Année : <%= yacht.year %></p>
+                <p>Largeur : <%= yacht.width %></p>
+                <p>Longeur : <%= yacht.length %></p>
+            </div>
+        <% end %>
+    </div>
 
 </body>
 </html>
