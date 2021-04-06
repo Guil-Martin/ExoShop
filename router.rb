@@ -1,9 +1,15 @@
-require "./controller"
+require "./lib/controller"
 
 class Router
   def call(env)
     path = env["REQUEST_PATH"]
-    params = Rack::Request.new(env).params
+    req = Rack::Request.new(env)
+    body = req.body.gets
+    params = {}
+
+    params.merge!(body ? JSON.parse(body) : {})
+
+    # params.merge()
 
     controller = Controller.instance
     controller.params = params
@@ -12,9 +18,10 @@ class Router
     when "/"
       controller.index
     when "/add"
+      # binding.pry
+      p params
+      p params["fruit"]
       controller.add_cart(params["fruit"])
-    when "/add_select"
-      controller.add_cart(params["fruit_select"])
     when "/empty_cart"
       controller.empty_cart
     else

@@ -14,6 +14,8 @@ gem "rspec"
 gem "rufo"
 
 gem "nokogiri"
+
+gem "open-uri"
 # Ruby web server
 gem "thin"
 # Generic interface of different Ruby template engines

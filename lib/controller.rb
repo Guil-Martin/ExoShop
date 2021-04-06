@@ -8,7 +8,6 @@ require "./lib/product"
 require "./lib/cart"
 
 class Controller
-
   attr_accessor :params
 
   def self.instance
@@ -27,15 +26,19 @@ class Controller
     @product_list = product_list
     @cart_total = cart_total
     @cart_list = cart_list
-    render({product_list: @product_list, cart_total: @cart_total, cart_list: @cart_list})
+
+    # @cart_list = @cart_list.map { |l| {}}
+
+    # render({product_list: @product_list, cart_total: @cart_total, cart_list: @cart_list})
+    render_json({ product_list: @product_list, cart_total: @cart_total, cart_list: @cart_list })
   end
 
-  def render(params, code=200)
-    file = caller_locations(1,1)[0].label
+  def render(params, code = 200)
+    file = caller_locations(1, 1)[0].label
     template = Tilt.new("./lib/views/#{file}.html.erb")
     [
       code,
-      {"Content-Type" => "text/html"},
+      { "Content-Type" => "text/html" },
       template.render(self, params)
     ]
   end
@@ -55,7 +58,7 @@ class Controller
       fruit.strip!
       fruit.capitalize!
       if @data.key?(fruit)
-        product().entry(fruit, @data[fruit], cart)
+        product.entry(fruit, @data[fruit], cart)
       else
         p "No such product in available products"
       end
@@ -70,41 +73,39 @@ class Controller
   end
 
   def cart_list
-    cart().cart_list
+    cart.cart_list
   end
 
   def cart_total
-    cart().display_total
+    cart.display_total
   end
 
   def get_product_data
-    begin
-      @db = SQLite3::Database.open "myshopDB.db"
-      @db.results_as_hash = true
+    @db = SQLite3::Database.open "myshopDB.db"
+    @db.results_as_hash = true
 
-      @data = {}
-      @db.execute("SELECT name, price FROM products").map do |row|
-        @data[row["name"]] = row["price"]
-      end
-
-      @data
-    rescue SQLite3::Exception => e
-      puts "Exception occurred"
-      puts e
-    ensure
-      @db&.close
+    @data = {}
+    @db.execute("SELECT name, price FROM products").map do |row|
+      @data[row["name"]] = row["price"]
     end
+
+    @data
+  rescue SQLite3::Exception => e
+    puts "Exception occurred"
+    puts e
+  ensure
+    @db&.close
   end
 
   def render_json(params, code = 200)
     [
       code,
-      {"Content-Type" => "application/json"},
+      { "Content-Type" => "application/json" },
       [params.to_json]
     ]
   end
 
   def redirect(to)
-    [302, {"Location" => to}, []]
+    [302, { "Location" => to }, []]
   end
 end

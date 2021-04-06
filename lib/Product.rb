@@ -33,6 +33,11 @@ class Product
 
   def discount(cart)
     #cart.total -= discount_cherry_fr(cart) + discount_banana_fr(cart) + discount_apple_en(cart) + discount_apple_it(cart)
+    
+    # build a hash with existing reduction, example :
+    # reduction = [{type => "Pommes", quantity => 2, reduction => 100},
+    #             {type => "Cerises", quantity => 2, reduction => 20}]
+  
   end
 
   def discount_cherry_fr(cart)
@@ -51,3 +56,4 @@ class Product
     cart.total -= 50 if cart.items["mele"]&.even?
   end
 end
+
