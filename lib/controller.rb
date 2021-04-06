@@ -7,6 +7,8 @@ require "sqlite3"
 require "./lib/product"
 require "./lib/cart"
 
+require "./lib/yatch"
+
 class Controller
   attr_accessor :params
 
@@ -64,6 +66,14 @@ class Controller
       end
     end
     redirect("/")
+  end
+
+  def boats
+    @yatchs = Yatch::all
+
+    # binding.pry
+    
+    render({yatchs: @yatchs})
   end
 
   private

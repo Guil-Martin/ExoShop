@@ -55,13 +55,13 @@ boat_length = boat_length.map {|l| l.delete_suffix("m").to_f}
 
 # binding.pry
 
-# Yatch::add_boats(boat_title:boat_title, 
-#           boat_descriptions:boat_descriptions, 
-#           boat_prices_value:boat_prices_value,
-#           boat_prices_taxe:boat_prices_taxe, 
-#           boat_year:boat_year, 
-#           boat_width:boat_width, 
-#           boat_length:boat_length)
+Yatch::add_boats(boat_title:boat_title, 
+          boat_descriptions:boat_descriptions, 
+          boat_prices_value:boat_prices_value,
+          boat_prices_taxe:boat_prices_taxe, 
+          boat_year:boat_year, 
+          boat_width:boat_width, 
+          boat_length:boat_length)
 
 Yatch::all.each do |boat|
 

@@ -24,6 +24,8 @@ class Router
       controller.add_cart(params["fruit"])
     when "/empty_cart"
       controller.empty_cart
+    when "/boats"
+      controller.boats
     else
       controller.not_found
     end
