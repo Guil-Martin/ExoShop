@@ -14,13 +14,13 @@
         <div class="yachts" style="display: flex; flex-wrap: wrap;justify-content: center">
         <% yachts.each do |yacht| %>
             <div class="yacht" style="border: 2px solid black;width: 20%">
-                <p>Nom : <%= yacht.name %></p>
-                <p>Description : <%= yacht.description %></p>
-                <p>Condition : <%= yacht.condition %></p>
-                <p>Prix : <%= yacht.price %><%= yacht.taxation %></p>
-                <p>Année : <%= yacht.year %></p>
-                <p>Largeur : <%= yacht.width %></p>
-                <p>Longeur : <%= yacht.length %></p>
+                <p>Nom : <%= yacht.data["name"] %></p>
+                <p>Description : <%= yacht.data["description"] %></p>
+                <p>Condition : <%= yacht.data["condition"] %></p>
+                <p>Prix : <%= yacht.data["price"] %><%= yacht.data["taxation"] %></p>
+                <p>Année : <%= yacht.data["year"] %></p>
+                <p>Largeur : <%= yacht.data["width"] %></p>
+                <p>Longeur : <%= yacht.data["length"] %></p>
             </div>
         <% end %>
     </div>

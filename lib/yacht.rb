@@ -23,16 +23,9 @@ class Yacht
             data)
     end
 
-    attr_reader :name, :description, :condition, :price, :taxation, :year, :width, :length
+    attr_reader :data # , :description, :condition, :price, :taxation, :year, :width, :length
     def initialize(data)
-        @name = data["name"];
-        @description = data["description"];
-        @condition = data["condition"];
-        @price = data["price"];
-        @taxation = data["taxation"];
-        @year = data["year"];
-        @width = data["width"];
-        @length = data["length"];
+        @data = data
     end
 
 end
