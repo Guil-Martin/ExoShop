@@ -8,27 +8,13 @@ class Yacht
 
     def self.all
         dbts.execute("SELECT name, description, condition, price, taxation, year, width, length FROM yachts").map do |row|
-            self.new(name:row["name"], 
-                description:row["description"], 
-                condition:row["condition"],
-                price:row["price"], 
-                taxation:row["taxation"], 
-                year:row["year"], 
-                width:row["width"], 
-                length:row["length"])
+            self.new(row)
         end
     end
 
     def self.get_by_name(name)
         boats = dbts.execute("SELECT (name, description, condition, price, taxation, year, width, length) FROM yachts WHERE name='#{name}' LIMIT 1").first
-        self.new(name:boats["name"], 
-                description:boats["description"], 
-                condition:boats["condition"],
-                price:boats["price"], 
-                taxation:boats["taxation"], 
-                year:boats["year"], 
-                width:boats["width"], 
-                length:boats["length"])
+        self.new(boats)
     end
 
     def self.add_yachts(data)
@@ -38,15 +24,15 @@ class Yacht
     end
 
     attr_reader :name, :description, :condition, :price, :taxation, :year, :width, :length
-    def initialize(name:, description:, condition:, price:, taxation:, year:, width:, length:)
-        @name = name;
-        @description = description;
-        @condition = condition;
-        @price = price;
-        @taxation = taxation;
-        @year = year;
-        @width = width;
-        @length = length;
+    def initialize(data)
+        @name = data["name"];
+        @description = data["description"];
+        @condition = data["condition"];
+        @price = data["price"];
+        @taxation = data["taxation"];
+        @year = data["year"];
+        @width = data["width"];
+        @length = data["length"];
     end
 
 end
